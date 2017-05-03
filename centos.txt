@@ -1,0 +1,25 @@
+
+1、 mount:  mount -t auto -o ro /dev/cdrom /mnt/tmp/
+
+
+network:
+
+(1) /etc/sysconfig/network-scripts/ifcfg-en......
+
+(2) /etc/sysconfig/network
+
+(3) /etc/resconf
+
+#测试php-fpm配置
+/usr/local/php/sbin/php-fpm -t
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf -t
+
+#启动php-fpm
+/usr/local/php/sbin/php-fpm
+/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php.ini -y /usr/local/php/etc/php-fpm.conf
+
+#关闭php-fpm
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+
+#重启php-fpm
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`

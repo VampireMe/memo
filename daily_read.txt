@@ -1,0 +1,7 @@
+
+（1）前端实现文件的断点续传： http://www.phpxs.com/post/5416/
+
+（2）MySql之自动同步表结构： https://my.oschina.net/alchemystar/blog/858996
+
+
+https://stackify.com/18-websites-every-developer-should-visit-right-now/

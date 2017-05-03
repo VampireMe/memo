@@ -1,0 +1,194 @@
+
+echo "# tmp" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+
+git remote add origin https://github.com/VampireMe/tmp.git
+
+git push -u origin master
+
+
+git remote add origin https://github.com/VampireMe/tmp.git
+git push -u origin master
+
+
+（1）关联 本地分支 和 远程分支：
+git branch --set-upstream-to origin/branch branch
+
+（2）全局用户信息配置
+ git config --global user.name "John Doe"
+ git config --global user.email johndoe@example.com
+
+ （3）查看自己提交的文件
+ git log --committer='gaoqing' --name-status
+
+ git log --committer='gaoqing' --name-status --after="2017-3-16"
+ 此命令可以帮助大家把这个一个时间节点之后所有的提交文件全列出来用来备份修改文件
+
+
+
+ （4）去除掉所有非路径的部分：^[^/]*$     Merge (.*+)$
+
+
+ （5）查看冲突未处理的文件列表: git ls-files -u
+
+ （6）本地代码与远程代码冲突问题
+
+        本地代码未commit的前提下，解决与远程代码冲突问题
+
+    git pull #失败
+    #将当前修改进行暂存起来
+    git stash
+    #或
+    git stash save "[注释]"
+
+    #获取最新的远程仓库代码
+    git pull
+
+    #恢复暂存的内容
+    git stash pop
+
+    #stash其他操作
+    #恢复最近一次save的原工作区内容,，并删除stash记录
+    git stash pop
+    #恢复最近一次save的原工作区内容,但不删除stash记录
+    git stash apply
+    #删除stash记录
+    git stash drop
+    #获取暂存列表
+    git stash list
+
+（7）如果我对某文件进行了修改，但我不想要push到远程仓库，同时我又想获取最新的修改记录
+
+   git stash save message 【隐藏当前变动，并设置指定的 message 信息】
+   git pull --rebase
+   git stash show  stash@{0} 【查看指定 stash index 中的文件】
+
+   如果暂存内容现在不想在当前分支恢复了，而是想单独起一个分支
+
+   git stash branch [newBranchName]
+
+（8）后悔药
+
+       还原到最近的版本，废弃本地做的修改（当前文件修改没有进行add操作的时候）
+
+   git checkout -- [文件名]
+
+       取消已经暂存的文件(撤销先前"git add"的操作)
+
+   #当前HEAD，返回到上一次commit点，不会有任何日志记录
+   git reset HEAD --hard
+
+   git reset HEAD [文件名]
+
+       回退所有内容到上一个提交点
+
+   #最近内容已经commit的情况下
+   git reset HEAD^ --hard
+
+       回退这个文件的版本到上一个版本
+
+   #最近内容已经commit的情况下
+   git reset HEAD^ [文件名]
+
+       将本地的状态回退到和远程的一样
+
+   git reset –-hard origin/[分支名]
+
+       回退到某个版本
+
+   # 获取所有的HEAD更改信息的sha1值
+   git reflog
+   git reset [SHA1]
+
+（9）关于代码的对比：
+   # 显示暂存区和工作区的差异
+   git diff
+   git diff [filename]
+
+   # 显示暂存区和上一个commit的差异【文件名】
+   git diff --cached [hello.txt]
+   git diff --cached [HEAD或者SHA1] [filename]
+
+   # 显示工作区与当前分支最新commit之间的差异
+   git diff HEAD
+   git diff [HEAD或分支名] [filename]
+
+   # 显示两次提交之间的差异【分支名】
+   git diff [first-branch]...[second-branch]
+   git diff [SHA1] [SHA1] [filename]
+
+   #分支之间的差异
+   #分支之间的差异
+   git diff [分支1] [分支2]
+   git diff [分支1]..[分支2]
+   #指定文件
+   git diff [分支1]:[file1] [分支2]:[file2]
+
+   #查看指定提交范围内的所有变更文件情况
+   git diff --stat master~[范围值] [分支名]
+   git diff --stat master~5 tmp
+   //还可以值查看具体某一个文件
+   git diff --stat master~5 tmp test.txt
+
+（10）定位哪个提交点导致文件出现问题
+
+    #先确定范围
+    git bisect start
+    git bisect bad  #一般都是当前HEAD是坏提交【sha1】
+    git bisect good a794f9bd96f06b57b4c10433e4d6abb3f0855749
+
+    #上面的步骤就是确定范围的，接下来就是回答git的问题，他指定的提交点是好的还是坏的
+    git bisect good//如果是坏的，就bad，直到你找到哪个提交点导致出现问题
+    #查看维护日志
+    git bisect log
+
+    git branch
+    #完成操作后，要回切到工作分支上
+    git bisect reset
+    git branch
+
+    git reset --hard fb47ddb2db...
+
+
+
+
+    检查文件中每一行代码是谁提交的记录
+
+    git blame -L [起始行数],[文件名]
+
+
+  （10）  根据 commit-id，查看所在分支名
+        git branch -r --contains commit-id
+
+ （11）查看所有与远程分支的对应关系：git branch -vv
+
+  （12）git将单个文件恢复到历史版本的正确方法如下：
+         git reset commit_id 文件路径
+         git checkout -- 文件路径
+
+  （13）
+    git fetch origin branch1:branch2
+    首先执行上面的fetch操作
+
+    使用远程branch1分支在本地创建branch2(但不会切换到该分支),
+    如果本地不存在branch2分支, 则会自动创建一个新的branch2分支,
+    如果本地存在branch2分支, 并且是`fast forward', 则自动合并两个分支, 否则, 会阻止以上操作.
+
+    git fetch origin :branch2
+
+    等价于: git fetch origin master:branch2
+
+  （14）
+      $ git checkout -b newBrach origin/master
+
+      上面命令表示，在origin/master的基础上，创建一个新分支。
+
+      此外，也可以使用git merge命令或者git rebase命令，在本地分支上合并远程分支。
+
+      $ git merge origin/master
+      # 或者
+      $ git rebase origin/master
+
+      上面命令表示在当前分支上，合并origin/master。

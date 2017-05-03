@@ -1,0 +1,93 @@
+
+./configure\
+ --prefix=/usr/local/gaoqing/php56\
+ --with-libdir=lib64\
+ --enable-fpm\
+ --with-fpm-user=php-fpm\
+ --with-fpm-group=www\
+ --enable-mysqlnd\
+ --with-mysql=mysqlnd\
+ --with-mysqli=mysqlnd\
+ --with-pdo-mysql=mysqlnd\
+ --enable-opcache\
+ --enable-pcntl\
+ --enable-mbstring\
+ --enable-soap\
+ --enable-zip\
+ --enable-calendar\
+ --enable-bcmath\
+ --enable-exif\
+ --enable-ftp\
+ --enable-intl\
+ --with-openssl\
+ --with-zlib\
+ --with-curl\
+ --with-gd\
+ --with-png-dir\
+ --with-jpeg-dir\
+ --with-gettext\
+ --with-mhash\
+ --with-ldap
+
+
+
+ # 设置php-fpm开机自动启动
+ chmod +x /etc/init.d/php-fpm
+ chkconfig php-fpm on
+ cp /data/soft/php/etc/php-fpm.conf.default /data/soft/php/etc/php-fpm.conf
+ service php-fpm start
+
+
+
+
+
+ ./configure \
+ --prefix=/usr/local/gaoqing/php71 \
+ --exec-prefix=/usr/local/gaoqing/php71 \
+ --bindir=/usr/local/gaoqing/php71/bin \
+ --sbindir=/usr/local/gaoqing/php71/sbin \
+ --includedir=/usr/local/gaoqing/php71/include \
+ --libdir=/usr/local/gaoqing/php71/lib/php \
+ --mandir=/usr/local/gaoqing/php71/php/man \
+ --with-config-file-path=/usr/local/gaoqing/php71/etc \
+ --with-mysql-sock=/usr/local/gaoqing/mysql/mysql.sock \
+ --with-mcrypt=/usr/include \
+ --with-mhash \
+ --with-openssl \
+ --with-mysql=shared,mysqlnd \
+ --with-mysqli=shared,mysqlnd \
+ --with-pdo-mysql=shared,mysqlnd \
+ --with-gd \
+ --with-iconv \
+ --with-zlib \
+ --enable-zip \
+ --enable-inline-optimization \
+ --disable-debug \
+ --disable-rpath \
+ --enable-shared \
+ --enable-xml \
+ --enable-bcmath \
+ --enable-shmop \
+ --enable-sysvsem \
+ --enable-mbregex \
+ --enable-mbstring \
+ --enable-ftp \
+ --enable-gd-native-ttf \
+ --enable-pcntl \
+ --enable-sockets \
+ --with-xmlrpc \
+ --enable-soap \
+ --without-pear \
+ --with-gettext \
+ --enable-session \
+ --with-curl \
+ --with-jpeg-dir \
+ --with-freetype-dir \
+ --enable-opcache \
+ --enable-fpm \
+ --enable-fastcgi \
+ --with-fpm-user=nginx \
+ --with-fpm-group=nginx \
+ --without-gdbm \
+ --with-mcrypt=/usr/local/related/libmcrypt \
+ --disable-fileinfo
