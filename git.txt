@@ -192,3 +192,20 @@ git branch --set-upstream-to origin/branch branch
       $ git rebase origin/master
 
       上面命令表示在当前分支上，合并origin/master。
+
+
+      （14）git 强制覆盖本地：
+
+      git fetch --all
+      git reset --hard origin/master
+      git pull
+      
+
+      （15）在项目之外，创建一个 .gitignore 类似功能的文件：
+
+      git config core.excludesfile ".local/.gitignore"
+
+
+      （16）将本地的项目与远程项目进行关联（包括用户名）
+      	
+      git remote set-url origin git@github.com:username/repo.git
