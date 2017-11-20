@@ -209,3 +209,7 @@ git branch --set-upstream-to origin/branch branch
       （16）将本地的项目与远程项目进行关联（包括用户名）
       	
       git remote set-url origin git@github.com:username/repo.git
+
+      （17）git http 方式时，存储用户名和密码：
+
+      http://yourname:password@git.oschina.net/name/project.git
