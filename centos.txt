@@ -23,3 +23,6 @@ kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
 
 #重启php-fpm
 kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+
+在 window 下，创建软连接：
+mklink /J F:\share\code\www\php_vendor php_vendor  为 php_vendor 创建软连接：F:\share\code\www\php_vendor
