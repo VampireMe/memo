@@ -213,3 +213,34 @@ git branch --set-upstream-to origin/branch branch
       （17）git http 方式时，存储用户名和密码：
 
       http://yourname:password@git.oschina.net/name/project.git
+
+      （18）
+        已track的文件，又必须在版本库中保留，该如何ignore呢
+        首先我们要在.gitignore/exclude中进行上述操作忽略他们，但是这些文件已经包括在版本库，光是这样忽略是木有用的，有修改依然会有M标记
+        这时我们在本地clone完成后如下操作,即可忽略这些文件的版本更新：
+
+        git update-index --assume-unchanged  [PATH or FILE]
+
+        另外重点说一下.
+        gitignore以及.git/info/exclude的区别
+        .gitignore
+
+            可以放到工作目录任何地方，以相对路径实施忽略；
+            可以提交到版本库，对所有clone下来的版本生效。 *所以个人特殊忽略不要在这里添加哦
+
+        .git/info/exclude
+
+            唯一，本地副本有效
+            不会提交到版本库，只对本地副本有效
+
+        ~/.gitconfig/core.excludesfile #全局ignore方法
+
+            唯一，本地所有git repo有效
+
+        gitignore 优先级
+
+        它检查多个gitignore文件的模式，从高到低优先级通过下面规则确定。
+        来自于支持使用模式的命令行命令
+        来自于文件系统中的.gitignore文件。目录结构较高的.gitignore模式将被较近的.gitignore覆盖
+        来自$GIT_DIR/info/exclude
+        被配置变量core.excludesfile指定文件中的模式
